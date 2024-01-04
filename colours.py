@@ -10,7 +10,6 @@ class Colours:
     blue = (13, 64, 216)
     white = (255, 255, 255)
     black = (0, 0, 0)
-    magenta = (181, 0, 166)
     
     @classmethod
     def get_cell_colours(cls):
@@ -18,4 +17,4 @@ class Colours:
     
     @classmethod
     def get_keypeg_colours(cls):
-        return [cls.lightGrey, cls.white, cls.magenta]
+        return [cls.lightGrey, cls.orange, cls.green]

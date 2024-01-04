@@ -5,7 +5,7 @@ from game import Game
 #Initialise pygame
 pygame.init()
 
-title_font = pygame.Font(None, 40)
+title_font = pygame.font.Font(None, 40)
 
 #Display screen and window title
 screen = pygame.display.set_mode((300, 700))
@@ -32,8 +32,9 @@ while True:
     screen.fill(Colours.darkBlue)
 
     game.draw(screen)
-    for button in game.buttons:
-        button.process(screen, game.code)
+    if game.board.guessed == False:
+        for button in game.buttons:
+            button.process(screen, game.code)
     
     pygame.display.flip()
 
