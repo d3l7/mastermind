@@ -10,10 +10,11 @@ class Board:
         self.cell_size = 50
         self.board = [[0 for j in range(self.num_cols)] for i in range(self.num_rows)]
         self.colours = Colours.get_cell_colours()[0:num_colours]
+        self.key_pegs = [[0 for j in range(self.num_cols)] for i in range(self.num_rows)]
         self.kp_colours = Colours.get_keypeg_colours()
         self.count = 0
         self.guessed = False
-        self.key_pegs = [[0 for j in range(self.num_cols)] for i in range(self.num_rows)]
+        self.game_over = False
 
     #Debugging
     def print_board(self):
@@ -34,7 +35,7 @@ class Board:
                                        self.cell_size, self.cell_size - 2)
             pygame.draw.rect(screen, Colours.darkGrey, kp_cell_rect)
             for column in range(self.num_cols):
-                if column % 2 != 0:
+                if column % 2 == 0:
                     kp_x_multiplier = 0.25
                 else:
                     kp_x_multiplier = 0.75

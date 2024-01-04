@@ -32,7 +32,7 @@ while True:
     screen.fill(Colours.darkBlue)
 
     game.draw(screen)
-    if game.board.guessed == False:
+    if not (game.board.guessed or game.board.game_over):
         for button in game.buttons:
             button.process(screen, game.code)
     
