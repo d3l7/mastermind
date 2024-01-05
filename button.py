@@ -32,10 +32,10 @@ class Button:
             if pygame.mouse.get_pressed(num_buttons=3)[0]:
                 self.buttonSurface.fill(self.fillColours['pressed'])
                 if self.onePress:
-                    self.onclickFunction(self.colour, code)
+                    self.onclickFunction(code)
                 
                 elif not self.alreadyPressed:
-                    self.onclickFunction(self.colour, code)
+                    self.onclickFunction(code)
                     self.alreadyPressed = True
                 
             else:

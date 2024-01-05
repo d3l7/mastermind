@@ -1,6 +1,7 @@
 import pygame, sys
 from colours import Colours
 from game import Game
+from menu import Menu
 
 #Initialise pygame
 pygame.init()
@@ -14,11 +15,11 @@ pygame.display.set_caption('Mastermind')
 clock = pygame.time.Clock()
 
 game = Game()
-game.create_buttons()
-game.create_code()
-game.board.print_board()
+menu = Menu(title_font, game)
 
-print(game.code)
+game.create_buttons()
+menu.create_buttons()
+
 #Game loop
 while True:
     #Allows the user to close the game
@@ -27,15 +28,20 @@ while True:
             pygame.quit()
             sys.exit()
 
-
-    #Drawing
     screen.fill(Colours.darkBlue)
 
-    game.draw(screen)
+    #Drawing
+    if menu.running == True:
+        menu.run(screen)
+    else:
+        screen.fill(Colours.darkBlue)
+        game.run(screen)
+    
+    """game.draw(screen)
     if not (game.board.guessed or game.board.game_over):
         for button in game.buttons:
-            button.process(screen, game.code)
-    
+            button.process(screen, game.code)"""
+
     pygame.display.flip()
 
     #Set frame-rate to 60fps

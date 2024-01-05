@@ -3,7 +3,7 @@ class Guess:
          self.board = board
 
     def award_key_pegs(self, code):
-            print('a')
+            print(code)
             self.guess = self.board.board[self.board.current_row]
             position_pegs = 0
             non_position_pegs = 0

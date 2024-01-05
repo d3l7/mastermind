@@ -24,10 +24,16 @@ class Board:
             print()
 
 
-    def update_board(self, colour, code):
+    def update_board(self, colour):
         self.board[self.current_row][self.current_col] = self.colours.index(colour)
         if self.current_col < (self.num_cols - 1):
             self.current_col += 1
+
+    def undo(self):
+        self.board[self.current_row][self.current_col] = 0
+        if self.current_col != 0:
+            self.current_col -= 1
+
         
     def draw(self, screen):
         for row in range(self.num_rows):
