@@ -1,18 +1,12 @@
-import pygame
+import pygame, time
 from colours import Colours
 
 class Board:
-    def __init__(self, rows, cols, num_colours):
-        self.num_rows = rows
-        self.num_cols = cols
+    def __init__(self):
         self.current_row = 0
         self.current_col = 0
         self.cell_size = 50
-        self.board = [[0 for j in range(self.num_cols)] for i in range(self.num_rows)]
-        self.colours = Colours.get_cell_colours()[0:num_colours]
-        self.key_pegs = [[0 for j in range(self.num_cols)] for i in range(self.num_rows)]
         self.kp_colours = Colours.get_keypeg_colours()
-        self.count = 0
         self.guessed = False
         self.game_over = False
 
@@ -23,16 +17,33 @@ class Board:
                 print(self.board[row][column], end='')
             print()
 
+    def create_board(self, rows, cols, num_colours):
+        self.num_rows = rows
+        self.num_cols = cols
+        self.board = [[0 for j in range(self.num_cols)] for i in range(self.num_rows)]
+        self.colours = Colours.get_cell_colours()[0:num_colours + 1]
+        self.key_pegs = [[0 for j in range(self.num_cols)] for i in range(self.num_rows)]
+
+
 
     def update_board(self, colour):
         self.board[self.current_row][self.current_col] = self.colours.index(colour)
         if self.current_col < (self.num_cols - 1):
             self.current_col += 1
+        time.sleep(0.1)
 
-    def undo(self):
+    def undo(self, code):
         self.board[self.current_row][self.current_col] = 0
         if self.current_col != 0:
             self.current_col -= 1
+
+    def reset(self):
+        self.board = [[0 for j in range(self.num_cols)] for i in range(self.num_rows)]
+        self.key_pegs = [[0 for j in range(self.num_cols)] for i in range(self.num_rows)]
+        self.current_row = 0
+        self.current_col = 0
+        self.guessed = False
+        self.game_over = False
 
         
     def draw(self, screen):

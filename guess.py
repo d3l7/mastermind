@@ -1,19 +1,33 @@
+import time
+
 class Guess:
-    def __init__(self, board):
+    def __init__(self, board, code):
          self.board = board
+         self.code = code
 
     def award_key_pegs(self, code):
-            print(code)
+            print(self.code)
             self.guess = self.board.board[self.board.current_row]
+            code_copy = self.code[:]
+            guess_copy = self.guess[:]
             position_pegs = 0
             non_position_pegs = 0
             keypegs_position = 0
-            for i in range(len(self.guess)):
-                 if self.guess[i] == code[i]:
-                      position_pegs +=1
-                 elif self.guess[i] != code[i] and self.guess[i] in code:
-                      non_position_pegs += 1
-            
+            for index, guess in enumerate(guess_copy):
+                 if guess == code_copy[index]:
+                      position_pegs += 1
+                      code_copy[index] = 'Checked sol.'
+                      guess_copy[index] = 'Checked guess.'
+
+            for index, guess in enumerate(guess_copy):   
+               for i, p in enumerate(code_copy):
+                    if p == guess:
+                        non_position_pegs += 1
+                        code_copy[i] = 'Checked solu.'
+                        break
+
+                      
+     
             for i in range(position_pegs):
                 self.board.key_pegs[self.board.current_row][keypegs_position] = 2
                 keypegs_position += 1
@@ -28,4 +42,5 @@ class Guess:
             else:
                  self.board.current_row += 1
                  self.board.current_col = 0
+            time.sleep(0.1)
 

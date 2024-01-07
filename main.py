@@ -1,5 +1,6 @@
 import pygame, sys
 from colours import Colours
+from buttons import MenuButton
 from game import Game
 from menu import Menu
 
@@ -17,31 +18,25 @@ clock = pygame.time.Clock()
 game = Game()
 menu = Menu(title_font, game)
 
-game.create_buttons()
+#Create buttons outside of game loop so that we aren't creating 60 buttons a second.
 menu.create_buttons()
-
 #Game loop
 while True:
     #Allows the user to close the game
     for event in pygame.event.get():
         if event.type == pygame.QUIT:   
-            pygame.quit()
-            sys.exit()
+            menu.quit_game()
 
-    screen.fill(Colours.darkBlue)
-
-    #Drawing
-    if menu.running == True:
+    #Run the menu or game
+    if not game.running:
+        screen.fill(Colours.darkBlue)
         menu.run(screen)
     else:
-        screen.fill(Colours.darkBlue)
+        screen.fill(Colours.darkBlue)    #Since the menu is always the first thing displayed on the screen, we need to clear the screen via refilling again
+        if not menu.played:
+            menu.played = True   
         game.run(screen)
     
-    """game.draw(screen)
-    if not (game.board.guessed or game.board.game_over):
-        for button in game.buttons:
-            button.process(screen, game.code)"""
-
     pygame.display.flip()
 
     #Set frame-rate to 60fps
