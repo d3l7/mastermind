@@ -38,8 +38,8 @@ class Game:
             
             screen.blit(text, textRect)
 
-            MenuButton((25, 650, 100, 30, pygame.font.Font(None, 20), self.board.colours[0], 
-                                        'Play again', self.reset)).process(screen)
+            MenuButton(25, 650, 100, 30, pygame.font.Font(None, 20), self.board.colours[0], 
+                                        'Play again', self.reset).process(screen)
             MenuButton(175, 650, 100, 30, pygame.font.Font(None, 20), self.board.colours[0], 
                                         'Return to menu', self.change_flag).process(screen)
         elif self.board.game_over:
