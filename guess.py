@@ -6,7 +6,6 @@ class Guess:
          self.code = code
 
     def award_key_pegs(self, code):
-            print(self.code)
             self.guess = self.board.board[self.board.current_row]
             code_copy = self.code[:]
             guess_copy = self.guess[:]
