@@ -15,7 +15,7 @@ class Game:
         self.board = Board()
         self.code = []
         self.buttons = []
-        self.colours = Colours.get_cell_colours()
+        self.colours = Colours.get_cell_colours()[1:self.num_colours]
 
 
         self.board.create_board(self.guesses, 4, self.num_colours)
@@ -69,14 +69,13 @@ class Game:
                                         'Undo', self.board.undo))
         
     def reset(self):
-        self.board.reset()
+        self.board.reset(self.guesses)
         self.guess = Guess(self.board, self.code)
         self.code = []
         time.sleep(0.1)
     
     def change_flag(self):
         self.running = False
-        self.reset()
         time.sleep(0.1)
 
     def change_blanks(self):

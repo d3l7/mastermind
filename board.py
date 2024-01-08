@@ -37,7 +37,8 @@ class Board:
         if self.current_col != 0:
             self.current_col -= 1
 
-    def reset(self):
+    def reset(self, rows):
+        self.num_rows = rows
         self.board = [[0 for j in range(self.num_cols)] for i in range(self.num_rows)]
         self.key_pegs = [[0 for j in range(self.num_cols)] for i in range(self.num_rows)]
         self.current_row = 0

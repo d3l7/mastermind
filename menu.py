@@ -20,7 +20,10 @@ class Menu:
         if not self.played:
             self.game.board.create_board(self.game.guesses, 4, self.game.num_colours + 1)
             self.game.guess = Guess(self.game.board, self.game.code)
+        else:
+            self.game.reset()
 
+        self.game.board.colours = Colours.get_cell_colours()[0:self.game.num_colours + 1]
         self.game.create_buttons(self.game.board.colours)
         if self.game.code == []:
             self.game.create_code()
